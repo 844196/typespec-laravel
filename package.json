@@ -1,0 +1,49 @@
+{
+  "name": "@efumaxay/typespec-laravel",
+  "version": "0.0.0",
+  "homepage": "https://github.com/844196/typespec-laravel",
+  "bugs": {
+    "url": "https://github.com/844196/typespec-laravel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/844196/typespec-laravel.git"
+  },
+  "license": "MIT",
+  "author": "Masaya Takeda <844196@gmail.com>",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**",
+    "lib/*.tsp",
+    "templates/*.eta"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "format": "biome format .",
+    "lint": "biome lint ."
+  },
+  "dependencies": {
+    "change-case": "~5.4.2",
+    "eta": "~3.2.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.3",
+    "@tsconfig/node18": "^18.2.2",
+    "@tsconfig/strictest": "^2.0.3",
+    "@types/node": "^18.19.17",
+    "@typespec/library-linter": "^0.53.0",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "@typespec/compiler": "^0.53.1",
+    "@typespec/http": "^0.53.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "tspMain": "lib/main.tsp"
+}

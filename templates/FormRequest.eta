@@ -1,0 +1,22 @@
+<?php
+
+namespace <%= it.namespace %>;
+
+<% if (it.docTags.length > 0) { %>
+/**
+<% it.docTags.forEach(([tag, ...rest]) => { %>
+ * @<%= tag %> <%= rest.join(' ').trim() %><%= '\n' %>
+<% }) %>
+ */
+<% } %>
+class <%= it.className %> extends <%= it.baseClass %><%= '\n' %>
+{
+    public function rules()
+    {
+        return [
+<% it.rules.forEach((v, k) => { %>
+            "<%= k %>" => <%~ v %>,
+<% }) %>
+        ];
+    }
+}
