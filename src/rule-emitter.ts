@@ -24,9 +24,9 @@ import {
   isNullType,
 } from "@typespec/compiler";
 import { type EmitterOutput, Placeholder, TypeEmitter } from "@typespec/compiler/emitter-framework";
-import { getDateFormat } from "./decorators.js";
-import type { Constraint, FieldRule } from "./emitter.js";
+import { getCustomRules, getDateFormat } from "./decorators.js";
 import { reportDiagnostic } from "./lib.js";
+import type { Constraint, FieldRule } from "./types.js";
 
 export class RuleEmitter extends TypeEmitter<object> {
   override modelInstantiation(model: Model, name: string | undefined): EmitterOutput<object> {
@@ -277,6 +277,14 @@ export class RuleEmitter extends TypeEmitter<object> {
     const dateFormat = getDateFormat(program, type);
     if (dateFormat !== undefined && dateFormat.length >= 1) {
       applied.format = `date_format:${dateFormat}`;
+    }
+
+    const customRules = getCustomRules(program, type);
+    if (customRules.length >= 1) {
+      if (applied.customRules === undefined) {
+        applied.customRules = [];
+      }
+      applied.customRules.push(...customRules);
     }
 
     return applied;

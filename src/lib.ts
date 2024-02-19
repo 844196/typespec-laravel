@@ -1,39 +1,41 @@
 import { type JSONSchemaType, createTypeSpecLibrary } from "@typespec/compiler";
 
-export type EmitterOptions = {
-  namespace?: string;
-  "class-name"?: string;
-  "output-file"?: string;
-  "base-class"?: string;
-};
+const EmitterDefaultOptions = {
+  namespace: "Generated\\Http\\{service-name}\\Requests",
+  "class-name": "{operation-id}Request",
+  "output-file": "generated/Http/{service-name}/Requests/{class-name}.php",
+  "base-class": "\\Illuminate\\Foundation\\Http\\FormRequest",
+} as const;
 
-const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
+export type EmitterOptions = Partial<Record<keyof typeof EmitterDefaultOptions, string>>;
+
+const EmitterOptionsSchema = {
   type: "object",
   additionalProperties: false,
   properties: {
     namespace: {
       type: "string",
       nullable: true,
-      default: "Generated\\Http\\{service-name}\\Requests",
+      default: EmitterDefaultOptions.namespace,
     },
     "class-name": {
       type: "string",
       nullable: true,
-      default: "{operation-id}Request",
+      default: EmitterDefaultOptions["class-name"],
     },
     "output-file": {
       type: "string",
       nullable: true,
-      default: "generated/Http/{service-name}/Requests/{class-name}.php",
+      default: EmitterDefaultOptions["output-file"],
     },
     "base-class": {
       type: "string",
       nullable: true,
-      default: "\\Illuminate\\Foundation\\Http\\FormRequest",
+      default: EmitterDefaultOptions["base-class"],
     },
   },
   required: [],
-};
+} as const satisfies JSONSchemaType<EmitterOptions>;
 
 export const $lib = createTypeSpecLibrary({
   name: "@efumaxay/laravel-typespec",

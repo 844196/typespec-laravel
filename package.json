@@ -32,6 +32,8 @@
     "@tsconfig/node18": "^18.2.2",
     "@tsconfig/strictest": "^2.0.3",
     "@types/node": "^18.19.17",
+    "@typespec/compiler": "^0.53.1",
+    "@typespec/http": "^0.53.0",
     "@typespec/library-linter": "^0.53.0",
     "typescript": "^5.3.3"
   },

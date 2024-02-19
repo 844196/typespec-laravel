@@ -13,79 +13,10 @@ import { Placeholder } from "@typespec/compiler/emitter-framework";
 import { createMetadataInfo, getHttpService, reportIfNoRoutes, resolveRequestVisibility } from "@typespec/http";
 import { pascalCase } from "change-case";
 import { Eta } from "eta";
+import { toLaravelValidationRule } from "./laravel.js";
 import type { EmitterOptions } from "./lib.js";
 import { RuleEmitter } from "./rule-emitter.js";
-
-export type Constraint = {
-  bail?: boolean;
-  requirements?: string;
-  type?: string;
-  minimum?: number;
-  maximum?: number;
-  minLength?: number;
-  maxLength?: number;
-  minItems?: number;
-  maxItems?: number;
-  format?: string;
-  pattern?: string;
-  enum?: Array<boolean | string | number>;
-  extra?: string[];
-  nullable?: boolean;
-};
-
-export type FieldRule = {
-  field: string;
-  constraint: Constraint;
-};
-
-function toLaravelValidationRule(constraint: Constraint) {
-  const rule = [];
-
-  if (constraint.bail !== undefined) {
-    rule.push("bail");
-  }
-  if (constraint.nullable !== undefined) {
-    rule.push("nullable");
-  }
-  if (constraint.requirements !== undefined) {
-    rule.push(constraint.requirements);
-  }
-  if (constraint.type !== undefined) {
-    rule.push(constraint.type);
-  }
-
-  if (constraint.enum !== undefined) {
-    rule.push(`in:${constraint.enum.join(",")}`);
-  }
-
-  if (constraint.minimum !== undefined) {
-    rule.push(`min:${constraint.minimum}`);
-  }
-  if (constraint.maximum !== undefined) {
-    rule.push(`max:${constraint.maximum}`);
-  }
-  if (constraint.minLength !== undefined) {
-    rule.push(`min:${constraint.minLength}`);
-  }
-  if (constraint.maxLength !== undefined) {
-    rule.push(`max:${constraint.maxLength}`);
-  }
-  if (constraint.minItems !== undefined) {
-    rule.push(`min:${constraint.minItems}`);
-  }
-  if (constraint.maxItems !== undefined) {
-    rule.push(`max:${constraint.maxItems}`);
-  }
-
-  if (constraint.format !== undefined) {
-    rule.push(constraint.format);
-  }
-  if (constraint.pattern !== undefined) {
-    rule.push(`regex:${constraint.pattern}`);
-  }
-
-  return `[${rule.map((v) => JSON.stringify(v)).join(",")}]`;
-}
+import type { FieldRule } from "./types.js";
 
 export async function $onEmit(context: EmitContext<EmitterOptions>) {
   if (context.program.compilerOptions.noEmit) {

@@ -5,6 +5,10 @@ using TypeSpec.Reflection;
 namespace Laravel;
 
 namespace Validation {
+  model RawCustomeRule {
+    raw: string;
+  }
+
   /**
    * @param format PHP's [`DateTime`](https://www.php.net/manual/en/class.datetime.php) class format string.
    *
@@ -16,4 +20,6 @@ namespace Validation {
    * ```
    */
   extern dec dateFormat(target: unknown, format: valueof string);
+
+  extern dec customRule(target: unknown, rule: string | RawCustomeRule);
 }
