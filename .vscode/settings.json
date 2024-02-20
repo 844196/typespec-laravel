@@ -21,5 +21,6 @@
   "[typespec]": {
     "editor.defaultFormatter": "typespec.typespec-vscode",
     "editor.formatOnSave": true
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

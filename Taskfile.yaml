@@ -5,6 +5,7 @@ tasks:
     cmds:
       - task: format
       - task: lint
+      - task: build
 
   format:
     cmds:
@@ -14,3 +15,12 @@ tasks:
   lint:
     cmds:
       - npx biome lint .
+
+  build:
+    cmds:
+      - task: clean
+      - npx tsc
+
+  clean:
+    cmds:
+      - rm -rf dist
