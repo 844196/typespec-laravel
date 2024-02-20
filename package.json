@@ -1,0 +1,27 @@
+{
+  "name": "@efumaxay/typespec-laravel",
+  "version": "0.0.0",
+  "homepage": "https://github.com/844196/typespec-laravel",
+  "bugs": {
+    "url": "https://github.com/844196/typespec-laravel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/844196/typespec-laravel.git"
+  },
+  "license": "MIT",
+  "author": "Masaya Takeda <844196@gmail.com>",
+  "type": "module",
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
+    "@tsconfig/strictest": "^2.0.3",
+    "@types/node": "^20.11.19",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
