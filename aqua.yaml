@@ -1,0 +1,7 @@
+registries:
+  - type: standard
+    ref: v4.138.0 # renovate: depName=aquaproj/aqua-registry
+packages:
+  - name: go-task/task@v3.34.1
+  - name: dprint/dprint@0.45.0
+  - name: google/yamlfmt@v0.11.0
