@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+run-name: CI (${{ github.head_ref }})
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Setup aqua
+        uses: aquaproj/aqua-installer@v2.2.0
+        with:
+          aqua_version: v2.16.4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run check
+        run: task ci

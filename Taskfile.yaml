@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+  ci:
+    cmds:
+      - task: format
+      - task: lint
+
+  format:
+    cmds:
+      - dprint check
+      - npx biome format .
+
+  lint:
+    cmds:
+      - npx biome lint .
